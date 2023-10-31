@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+
 }
 
 .App-logo {
@@ -35,4 +36,15 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Example CSS */
+.particles-container {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* Set an appropriate height */
+  z-index: 5000;
+  pointer-events: none;
 }
