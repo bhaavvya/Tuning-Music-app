@@ -4,9 +4,10 @@ const SongLike = require('../models/likes.js');
 
 // POST request to add a new song like
 router.post('/like', async (req, res) => {
-  const { songId, userId } = req.body;
+  const { songId, user } = req.body;
+  console.log(user)
   try {
-    const newLike = await SongLike.create({ songId, userId });
+    const newLike = await SongLike.create({ songId, user });
     res.status(201).json(newLike);
   } catch (error) {
     console.error("abcd",error);

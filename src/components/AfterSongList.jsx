@@ -46,7 +46,7 @@ paddingRight:'10px'
           <source src={song.songsUrl} type="audio/mpeg" />
           Your browser does not support the audio element.
         </audio>
-        <LikeButton  songId={song._id} userId={user._id} />
+        <LikeButton  songId={song._id} userId={user} />
       </div>
     </div>
     <h4 className='text-white'><b>{song.title}</b></h4>
@@ -65,12 +65,7 @@ const AfterSongList = () => {
       try {
         const response = await axios.get('http://localhost:1010/api/songs');
         setSongs(response.data);
-        const username = localStorage.getItem('username');
-        const email = localStorage.getItem('email');
-        const password = localStorage.getItem('password');
-
-        const res = await axios.post('http://localhost:1010/api/user/getUser', { username, email, password });
-        setUser(res.data);
+        console.log(response.data);
       } catch (error) {
         console.error('Error fetching songs:', error);
       }
@@ -80,12 +75,30 @@ const AfterSongList = () => {
   }, []);
 
   useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const username = localStorage.getItem('username');
+        const name = localStorage.getItem('name');
+        const email = localStorage.getItem('email');
+        const password = localStorage.getItem('password');
+
+        const res = await axios.post('http://localhost:1010/api/user/getUser', { username, name, email, password });
+        setUser(res.data._id);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
     // This will log the user state when it changes
-    console.log(user);
+    console.log("hehe", user);
   }, [user]);
 
   if (!user) {
-    return <div>Loading...</div>; // You can add a loading state
+    return <div>Loading...</div>;
   }
 
   return (

@@ -1,13 +1,14 @@
 import React,{useState} from 'react';
 import axios from 'axios';
 
-const LikeButton = ({ songId, userId }) => {
+const LikeButton = ({ songId, user }) => {
     const [liked, setLiked] = useState(false);
   const handleLike = async () => {
     try {
-      const response = await axios.post('http://localhost:1010/api/likes/like', {songId, userId });
+      console.log("ofc",user)
+      const response = await axios.post('http://localhost:1010/api/likes/like', {songId, user });
       setLiked(!liked);
-      console.log(response.data); // Handle the response data as needed
+      console.log("cfjnvif",response.data); // Handle the response data as needed
     } catch (error) {
       console.error('Error while liking the song:', error); // Handle the error appropriately
     

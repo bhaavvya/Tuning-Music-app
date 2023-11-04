@@ -4,6 +4,7 @@ import Carousel from './Carousel';
 import axios from 'axios';
 import Footer from './Footer';
 import AfterSongList from './AfterSongList';
+import SongList from './SongList';
 const AfterNav = () => {
   const [user, setUser] = useState();
 
@@ -11,13 +12,16 @@ const AfterNav = () => {
     const fetchUser = async () => {
       try {
         const username = localStorage.getItem('username');
+        const name = localStorage.getItem('name');
         const email = localStorage.getItem('email');
         const password = localStorage.getItem('password');
-
+        console.log(username)
+        console.log(email)
+        console.log(password)
         // Make a request to the backend to fetch the user data
-        const response = await axios.post('http://localhost:1010/api/user/getUser', { username, email, password });
-        setUser(response.data); // Set the user data in the state
-        console.log(response.data); // Check the response data
+        //const response = await axios.get('http://localhost:1010/api/user/getUser', { username,name, email, password });
+        setUser({username,name, email, password }); // Set the user data in the state
+        console.log(user); // Check the response data
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -63,7 +67,7 @@ const AfterNav = () => {
 
 
 <Carousel />
-<AfterSongList user={user} />
+<AfterSongList  />
 <Footer />
 
     </>

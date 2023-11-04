@@ -161,7 +161,7 @@ const Register = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        axios.post( 'http://localhost:1010/register', {name, email, password})
+        axios.post( 'http://localhost:1010/register', {name,username, email, password})
         .then(result => {
             console.log(result);
             if(result.data === "Already registered"){

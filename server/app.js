@@ -5,6 +5,11 @@ const bodyParser = require('body-parser');
 const allowCors = require('./config/cors');
 const config = require('./config/config');
 const User = require('./models/user.js');
+//require('../server/config/db')
+// mongoose.Promise = global.Promise;
+// mongoose.set('debug', config.IS_PRODUCTION)
+// mongoose.connect(config.DATABASE);
+// let db = mongoose.connection;
 
 mongoose.Promise = global.Promise;
 mongoose.set('debug', config.IS_PRODUCTION)
@@ -18,6 +23,7 @@ db.on('open', () => {
 db.on('error', (err) => {
     console.log(`Database error: ${err}`,config.DATABASE);
 });
+
 
 // Instantiate express
 const app = express();
@@ -41,7 +47,7 @@ app.use(allowCors);
 app.post('/register', (req, res)=>{
     // To post / insert data into database
 
-    const {name,email, password} = req.body;
+    const {name,username,email, password} = req.body;
     User.findOne({email: email})
     .then(user => {
         if(user){
@@ -57,12 +63,30 @@ app.post('/register', (req, res)=>{
     })
     
 })
-app.post('/api/user/getUser', async (req, res) => {
-    const { username, email, password } = req.body;
+app.get('/api/user/getUser', async (req, res) => {
+    const { username,name, email, password } = req.body;
   
     try {
       // Query the database to find the user based on the provided username, email, and password
-      const user = await User.findOne({ username, email, password });
+      const user = await User.findOne({ username,name, email, password });
+  
+      if (!user) {
+        return res.status(404).json('User not found');
+      }
+  
+      // If the user is found, send the user data as the response
+      res.status(200).json(user);
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      res.status(500).json('Internal server error');
+    }
+  });
+  app.post('/api/user/getUser', async (req, res) => {
+    const { username,name, email, password } = req.body;
+  
+    try {
+      // Query the database to find the user based on the provided username, email, and password
+      const user = await User.findOne({ username,name, email, password });
   
       if (!user) {
         return res.status(404).json('User not found');
@@ -78,14 +102,14 @@ app.post('/api/user/getUser', async (req, res) => {
 
 app.post('/login', (req, res)=>{
     // To find record from the database
-    const {email, password} = req.body;
+    const {username,name,email, password} = req.body;
     User.findOne({email: email})
     .then(user => {
         if(user){
             // If user found then these 2 cases
             console.log(password)
             if(user.password === password) {
-                res.json({ message: 'Success', username: user.username, email: user.email, password: user.password });
+                res.json({ message: 'Success', username: user.username,name:user.name, email: user.email, password: user.password });
             }
             else{
                 res.json("Wrong password");
@@ -137,6 +161,7 @@ app.use("/api/albums/", albumRoute);
 app.use('/api/likes', require('./routes/likes'));
 app.get('/api/likes',require('./routes/likes'))
 const songRoute = require("./routes/songs");
+app.use("/api/songs", songRoute);
 app.use("/api/songs", songRoute);
 //app.use('/api/likes', require('./routes/likes'));
 app.listen(port, () => {
