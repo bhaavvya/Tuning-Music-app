@@ -68,3 +68,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+![image](https://github.com/bhaavvya/temp1/assets/110487270/659f24f7-7c57-4de1-8909-c0da785ac9e5)
+![image](https://github.com/bhaavvya/temp1/assets/110487270/f4fbf36b-6ef1-43a3-8a9c-844871c8baa7)
+![image](https://github.com/bhaavvya/temp1/assets/110487270/c046c406-64e7-4d51-8158-eb03293d0855)
+![image](https://github.com/bhaavvya/temp1/assets/110487270/c6a5b347-6c18-469d-a07d-348f5bafe045)
+![image](https://github.com/bhaavvya/temp1/assets/110487270/bb23aac0-e637-46e7-8906-df73d79e2bba)
+<h1>Demo of Tuning app</h1>
+https://github.com/bhaavvya/temp1/assets/110487270/c8ca18f4-ae58-4fbb-908b-f5a0e510b00b
+
+
+
+
